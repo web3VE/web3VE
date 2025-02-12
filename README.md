@@ -1,9 +1,9 @@
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/W3VE/W3VE/main/public/images/w3ve2.png">
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/W3VE/W3VE/main/public/images/w3ve1.png">
+    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/web3VE/web3VE/blob/main/images/web3ve2.png">
+    <source media="(prefers-color-scheme: light)" srcset="https://github.com/web3VE/web3VE/blob/main/images/web3ve2.png">
     <img alt="web3VE"
-         src="https://raw.githubusercontent.com/W3VE/W3VE/main/public/images/w3ve1.png"
+         src="https://github.com/web3VE/web3VE/blob/main/images/web3ve2.png"
          width="50%">
   </picture>
 
