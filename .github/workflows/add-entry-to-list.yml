@@ -1,0 +1,65 @@
+name: Add entry to list.md on issue label
+
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: write
+
+jobs:
+  add-entry:
+    if: github.event.label.name == 'entry'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Insert entry into list.md
+        env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_URL: ${{ github.event.issue.html_url }}
+          ISSUE_CREATED_AT: ${{ github.event.issue.created_at }}
+        run: |
+          set -euo pipefail
+
+          year=$(date -u -d "$ISSUE_CREATED_AT" +%Y)
+          printf -v issue_id "%04d" "$ISSUE_NUMBER"
+
+          # Markdown table safety: escape pipe characters in title.
+          safe_title=${ISSUE_TITLE//|/\\|}
+
+          new_line="|web3VE-${year}-${issue_id}|${safe_title}|${ISSUE_URL}|"
+
+          # Avoid duplicate insertion for the same issue.
+          if grep -Fq "|${ISSUE_URL}|" list.md; then
+            echo "Entry already exists for ${ISSUE_URL}. Skipping."
+            exit 0
+          fi
+
+          {
+            sed -n '1,2p' list.md
+            {
+              sed -n '3,$p' list.md
+              echo "$new_line"
+            } | LC_ALL=C sort -t'|' -k2,2r
+          } > list.md.tmp
+          mv list.md.tmp list.md
+
+      - name: Commit and push
+        run: |
+          set -euo pipefail
+
+          if git diff --quiet -- list.md; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add list.md
+          git commit -m "Add issue entry to list.md (#${{ github.event.issue.number }})"
+          git push
