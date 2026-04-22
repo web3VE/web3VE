@@ -1,9 +1,11 @@
 | ID | タイトル | URL |
 |-----|-----|-----|
+|web3VE-2025-0058|zkLend - 精度誤差による脆弱性により $9.57M相当の被害|https://github.com/web3VE/web3VE/issues/58|
 |web3VE-2025-0055|Origin Dollar（OUSD） - 再入可能性の脆弱性 約800万ドルの被害|https://github.com/web3VE/web3VE/issues/55|
 |web3VE-2025-0054|オラクルの脆弱性 700万ドル相当のDAIが不正流出|https://github.com/web3VE/web3VE/issues/54|
 |web3VE-2025-0043|Uranium Finance K値不変性（K=X*Y）チェックの実装ミス|https://github.com/web3VE/web3VE/issues/43|
 |web3VE-2025-0038|SuiのDEX「Cetus」、スマートコントラクトへのハッキングにより約321億円相当の被害|https://github.com/web3VE/web3VE/issues/38|
+|web3VE-2025-0036|Tornado Cash Governance - コントラクトメタモーフィック攻撃による不正投票による資金流出|https://github.com/web3VE/web3VE/issues/36|
 |web3VE-2025-0029|WintermuteのDeFiウォレットがProfanityツールの脆弱な鍵生成アルゴリズムにより1億6000万ドル流出|https://github.com/web3VE/web3VE/issues/29|
 |web3VE-2025-0028|The Idols NFTのセルフトランスファーにおける報酬ロジックの脆弱性|https://github.com/web3VE/web3VE/issues/28|
 |web3VE-2025-0024|Nomad Bridge ゼロハッシュ攻撃による資金不正流出|https://github.com/web3VE/web3VE/issues/24|
