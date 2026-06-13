@@ -1,5 +1,6 @@
 | ID | タイトル | URL |
 |-----|-----|-----|
+|web3VE-2026-0060|Truebit Protocolの「Purchase」旧コントラクトにおける価格計算ロジックの脆弱性 $26.6Mの被害|https://github.com/web3VE/web3VE/issues/60|
 |web3VE-2025-0058|zkLend - 精度誤差による脆弱性により $9.57M相当の被害|https://github.com/web3VE/web3VE/issues/58|
 |web3VE-2025-0055|Origin Dollar（OUSD） - 再入可能性の脆弱性 約800万ドルの被害|https://github.com/web3VE/web3VE/issues/55|
 |web3VE-2025-0054|オラクルの脆弱性 700万ドル相当のDAIが不正流出|https://github.com/web3VE/web3VE/issues/54|
