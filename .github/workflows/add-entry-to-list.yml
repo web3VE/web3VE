@@ -1,12 +1,11 @@
-name: Add entry to list.md on issue label (via PR)
+name: Add entry to list.md on issue label
 
 on:
   issues:
     types: [labeled]
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 jobs:
   add-entry:
@@ -16,6 +15,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ssh-key: ${{ secrets.LIST_ENTRY_DEPLOY_KEY }}
+          ref: main
 
       - name: Insert entry into list.md
         env:
@@ -49,15 +51,20 @@ jobs:
           } > list.md.tmp
           mv list.md.tmp list.md
 
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v6
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: Add issue entry to list.md (#${{ github.event.issue.number }})
-          branch: bot/add-entry-${{ github.event.issue.number }}
-          title: "Add issue entry (#${{ github.event.issue.number }})"
-          body: |
-            This PR was automatically created by GitHub Actions.
+      - name: Commit and push to main
+        env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
 
-            - Issue: ${{ github.event.issue.html_url }}
-          base: main
+          if git diff --quiet -- list.md; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git config user.name "web3VE list entry bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add list.md
+          git commit -m "Add issue entry to list.md (#${ISSUE_NUMBER})"
+          git pull --rebase origin main
+          git push origin HEAD:main
